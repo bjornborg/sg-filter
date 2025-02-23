@@ -10,7 +10,8 @@ if(NOT WIN32)
   set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} \
       -D_FORTIFY_SOURCE=2 -O3 -s")
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} \
-      -g -fsanitize=thread")
+      -g" )
+# -fsanitize=thread
   # -fsanitize=address
   set(CMAKE_CXX_FLAGS
       "${CMAKE_CXX_FLAGS} \
@@ -29,7 +30,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 
 # ##############################################################################
 # Eigen3 lib
@@ -66,8 +67,8 @@ set(LIBRARIES ${LIBRARIES} Threads::Threads)
 find_package(Catch2 3 REQUIRED)
 
 add_executable(
-  ${PROJECT_NAME}-ga-runner ${CMAKE_CURRENT_SOURCE_DIR}/test/test-sg-filter.cpp
+  ${PROJECT_NAME}-runner ${CMAKE_CURRENT_SOURCE_DIR}/test/test-sg-filter.cpp
   $<TARGET_OBJECTS:filter-core>
 )
-target_link_libraries(${PROJECT_NAME}-ga-runner PRIVATE  ${LIBRARIES} Catch2::Catch2WithMain)
+target_link_libraries(${PROJECT_NAME}-runner PRIVATE  ${LIBRARIES} Catch2::Catch2WithMain)
 add_test(NAME ${PROJECT_NAME}-ga-runner COMMAND ${PROJECT_NAME}-ga-runner)
