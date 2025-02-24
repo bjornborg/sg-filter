@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project(sg-filter)
 set(CMAKE_CXX_STANDARD 23)
@@ -37,22 +37,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 set(LIBRARIES ${LIBRARIES} ${EIGEN3_LIBRARIES})
-
-
-
-# ##############################################################################
-# gnuplot-iostream lib
-# find_package(Boost REQUIRED COMPONENTS iostreams system filesystem)
-# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/gnuplot-iostream)
-# set(GnuPlotIostream_BuildTests
-#     OFF
-#     CACHE INTERNAL "build gnuplot iostream tests" FORCE)
-# set(GnuPlotIostream_BuildExamples
-#     OFF
-#     CACHE INTERNAL "build gnuplot iostream examples" FORCE)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/gnuplot-iostream)
-# set(LIBRARIES ${LIBRARIES} gnuplot_iostream Boost::iostreams Boost::system
-#               Boost::filesystem)
 
 
 add_library(

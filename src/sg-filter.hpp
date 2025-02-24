@@ -27,10 +27,10 @@ class SgFilter {
       uint32_t const a_windowLength, uint32_t const a_polyorder,
       uint32_t const a_deriv = 0, double const a_delta = 1.0,
       Mode const a_mode = Mode::Interpolate, double const a_constant = 0.0);
-  // static std::vector<double> apply(std::vector<double> const &a_x,
-  //     uint32_t const a_windowLength, uint32_t const a_polyorder,
-  //     uint32_t const a_deriv = 0, double const a_delta = 1.0,
-  //     Mode const a_mode = Mode::Interpolate, double const a_constant = 0.0);
+  static std::vector<double> apply(std::vector<double> const &a_x,
+      uint32_t const a_windowLength, uint32_t const a_polyorder,
+      uint32_t const a_deriv = 0, double const a_delta = 1.0,
+      Mode const a_mode = Mode::Interpolate, double const a_constant = 0.0);
   static Eigen::VectorXd getSavGolCoeffs(uint32_t const a_windowLength,
       uint32_t const a_polyorder, uint32_t const a_deriv = 0,
       double const a_delta = 1.0, int32_t a_pos = -1,

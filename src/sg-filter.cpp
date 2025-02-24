@@ -38,19 +38,17 @@ Eigen::VectorXd Filter::SgFilter::apply(Eigen::VectorXd const &a_x,
   return y;
 }
 
-// std::vector<double> Filter::SgFilter::apply(std::vector<double> const
-// &a_signal,
-//     uint32_t const a_windowLength, uint32_t const a_polyorder,
-//     uint32_t const a_deriv, double const a_delta, Mode const a_mode,
-//     double const a_constant)
-// {
-
-//   // std::vector<double> results(a_array.size(),
-//   //     convolve(Eigen::Map<double>(a_array.data(), a_array.size(), 1),
-//   //         Eigen::Map<double>(a_kernel.data(), a_kernel.size(), 1))
-//   //         .data());
-//   return std::vector<double>();
-// }
+std::vector<double> Filter::SgFilter::apply(std::vector<double> const &a_x,
+    uint32_t const a_windowLength, uint32_t const a_polyorder,
+    uint32_t const a_deriv, double const a_delta, Mode const a_mode,
+    double const a_constant)
+{
+  Eigen::VectorXd y =
+      apply(Eigen::Map<Eigen::VectorXd const>(a_x.data(), a_x.size(), 1),
+          a_windowLength, a_polyorder, a_deriv, a_delta, a_mode, a_constant);
+  std::vector<double> results(y.data(), y.data() + y.size());
+  return results;
+}
 
 Eigen::VectorXd Filter::SgFilter::getSavGolCoeffs(uint32_t const a_windowLength,
     uint32_t const a_polyorder, uint32_t const a_deriv, double const a_delta,

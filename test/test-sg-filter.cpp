@@ -3,6 +3,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_vector.hpp>
+
 #include <iostream>
 
 TEST_CASE("Sg filter - Coeffs")
@@ -55,13 +57,22 @@ TEST_CASE("Sg filter - Coeffs")
 
 TEST_CASE("Sg filter - Apply")
 {
-  Eigen::VectorXd x(9);
-  x << 2, 2, 5, 2, 1, 0, 1, 4, 9;
-
-  Eigen::VectorXd yref = x;
-  yref << 2, 2, 3.54286, 2.85714, 0.657143, 0.171429, 1, 4, 9;
-
-  Eigen::VectorXd y = Filter::SgFilter::apply(x, 5, 3);
-  // std::cout << "sgfilter y: " << y.transpose() << std::endl;
-  REQUIRE(yref.isApprox(y, 1e-4));
+  // std vector
+  {
+    std::vector<double> x{2, 2, 5, 2, 1, 0, 1, 4, 9};
+    std::vector<double> yref{
+        2, 2, 3.54286, 2.85714, 0.657143, 0.171429, 1, 4, 9};
+    std::vector<double> y = Filter::SgFilter::apply(x, 5, 3);
+    REQUIRE_THAT(y, Catch::Matchers::Approx(yref));
+  }
+  // Eigen
+  {
+    Eigen::VectorXd x(9);
+    x << 2, 2, 5, 2, 1, 0, 1, 4, 9;
+    Eigen::VectorXd yref = x;
+    yref << 2, 2, 3.54286, 2.85714, 0.657143, 0.171429, 1, 4, 9;
+    Eigen::VectorXd y = Filter::SgFilter::apply(x, 5, 3);
+    // std::cout << "sgfilter y: " << y.transpose() << std::endl;
+    REQUIRE(yref.isApprox(y, 1e-4));
+  }
 }
