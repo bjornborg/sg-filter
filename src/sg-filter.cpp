@@ -129,7 +129,7 @@ Eigen::VectorX<T> Filter::convolve(
   results = a_array;
   uint64_t const offset = a_kernel.size() / 2;
   for (uint64_t n{offset}; n < a_array.size() - offset; n++) {
-    results(n) = a_kernel.dot(
+    results(n) = a_kernel.reverse().dot(
         a_array.segment(n - offset, a_kernel.size()).array().matrix());
   }
 
